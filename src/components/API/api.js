@@ -2,18 +2,19 @@ import axios from "axios";
 
 const URL_POST = 'https://jsonplaceholder.typicode.com/posts';
 
-async function getPosts(){
-    let data = null;
+async function getPostsAPI(){
     try{
+
+    let data = null;
     const response = await axios.get(URL_POST);
+
     data = response.data;
-    }catch(err)
-    {
-        console.log(err);
-        return [];
-    }
     return data;
+
+    }catch(err){
+        console.log(err, 'getPosts api error')
+    }
 }
 
-export {getPosts}
+export {getPostsAPI}
 

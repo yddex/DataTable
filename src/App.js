@@ -1,24 +1,18 @@
-import { useState } from 'react';
-import { getPosts } from './components/API/api';
-import './App.css';
+import { useEffect } from "react";
+import { setStateThunk } from "./components/store/thunks/thunks";
+import { useDispatch } from "react-redux";
+import { Table } from "./components/Table/Table";
+import "./App.css";
 
 function App() {
-  const [db, setDb] = useState([]);
+  const dispatch = useDispatch();
 
+  useEffect(()=>{
+    dispatch(setStateThunk());
+  })
 
-  async function getData(){
-    let data = await getPosts();
-    console.log(data);
-    setDb(data);
-  }
-
-  
-  
-
-return (
-  <>
-    <div onClick={getData}>Click to get base!</div>    
-  </>
+  return (
+      <Table/>
   );
 }
 
