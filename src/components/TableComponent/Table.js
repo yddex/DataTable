@@ -1,63 +1,44 @@
-import { useEffect, useState } from 'react';
-import { getAllPages } from '../store/selectors/selectors';
+import { getAllPagesSelector } from '../store/selectors/selectors';
 import { useSelector } from 'react-redux'
 import { HeaderComponent, TableComponents } from './components';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
+//import { getCurrentPageSelector } from '../store/selectors/selectors';
 import './style.scss'
 
 
 
 
-export function Table(){
-    const pages = useSelector(getAllPages());
-    const [coursePage, setCoursePage] = useState(0)
-    const [disabledButtons, setDisabledButtons] = useState({back: true, next: false})
-
-    const hundleNextPage = () => {
-        setCoursePage(coursePage + 1);
-    }
-
-    const hundleBackPage = () => {
-        setCoursePage(coursePage - 1);
-    }
-
-    useEffect(()=>{
-
-        if(coursePage === 0){
-            setDisabledButtons({back: true, next: false});
-
-        }else if(coursePage === pages.length - 1){
-            setDisabledButtons({back: false, next: true})
-
-        }else{
-            setDisabledButtons({back: false, next: false})
-        }
-
-
-
-    },[coursePage])
+export function Table({currentPage}) {
+    //const location = useLocation();
+    const pages = useSelector(getAllPagesSelector());
+    
 
     return (
         <>
+            <HeaderComponent />
+            <Routes>
+                {pages.map((page, i) => {
 
-        <HeaderComponent/>
-        <TableComponents postList={pages[coursePage].posts}/>
+                    return <Route exact path={page.path}
+                        element={<TableComponents postList={pages[i].posts} key={i}/>} />
+                })}
+            </Routes>
 
 
+            <nav className='nav footer'>
+                <Link
+                    className={`nav__button nav__button_back`}
+                    to={currentPage.prevPath}>
+                    Назад
+                </Link>
 
-        <nav className='nav'>
-            <button 
-            className={`nav__button nav__button_next ${disabledButtons.back && "disabled"}`}
-            onClick={hundleBackPage}>
-                Назад
-            </button>
-            
-            <button 
-            className={`nav__button nav__button_next ${disabledButtons.next && "disabled"}`}
-            onClick={hundleNextPage}>
-                Вперед
-            </button>
-        </nav>
+                <Link
+                    to={currentPage.nextPath}
+                    onClick={()=>console.log(currentPage.nextPath, 'buttton')}
+                    className={`nav__button nav__button_next`}>
+                    Вперед
+                </Link>
+            </nav>
         </>
     )
 }

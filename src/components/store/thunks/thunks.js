@@ -3,21 +3,6 @@ import { setState, setError ,setLoading, setPages } from "../actions/actions"
 
 
 
-export const initPageThunk = (pagePost = 10) => (dispatch, getState)=>{
-    const state = getState();
-    const posts = state.posts;
-    const pages = [];
-    for(let i=0, j=1; i < posts.length; i+=pagePost, j++){
-        let page = {
-            number: j,
-            posts: []
-        }
-        page.posts.push(...posts.slice(i,i+10));
-        pages.push({...page});
-    }
-    dispatch(setPages(pages));
-}
-
 
 export const setStateThunk = () => async (dispatch, getState) => {
     try{
@@ -32,4 +17,37 @@ export const setStateThunk = () => async (dispatch, getState) => {
         dispatch(setError(err));
     }
 }
+
+
+
+export const initPageThunk = (pagePost = 10) => (dispatch, getState)=>{
+    const state = getState();
+    const posts = state.posts;
+    const pages = [];
+
+    for(let i=0, j=0; i < posts.length; i+=pagePost, j++){
+        let page = {
+            number: j,
+            path: `/${j}`,
+            prevPath: `/${j-1}`,
+            nextPath: `/${j+1}`,
+            posts: []
+        }
+        if(j===0){
+            page.path = '/'
+            page.prevPath = null;
+        }
+        if(j===1){
+            page.prevPath = '/'
+        }
+        page.posts.push(...posts.slice(i,i+10));
+        pages.push({...page});
+    }
+
+    pages[0].prevPath = pages[pages.length-1].path;
+    pages[pages.length-1].nextPath = '/';
+    dispatch(setPages(pages));
+    
+}
+
 
