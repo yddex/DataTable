@@ -2,7 +2,7 @@ import {
     SET_STATE_POST,
     SET_STATE_ERROR,
     SET_STATE_LOADING,
-    SET_PAGES, 
+    SET_PAGES,
 } from "./types";
 
 export const setState = (payload) => {
@@ -32,3 +32,5 @@ export const setPages = (payload) => {
         payload
     }
 }
+
+

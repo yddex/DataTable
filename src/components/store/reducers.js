@@ -3,6 +3,7 @@ import {
     SET_STATE_ERROR,
     SET_STATE_LOADING,
     SET_PAGES,
+    SET_SORT,
 } from "./actions/types";
 
 let initialState = {
@@ -29,6 +30,7 @@ export function postsReducer(state = initialState, action) {
 
         case SET_PAGES:
             return { ...state, pages: action.payload }
+
 
         default: return state;
     }

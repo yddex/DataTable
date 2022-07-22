@@ -1,5 +1,12 @@
 @import './vars';
-
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.wrapper-up{
+    flex-grow: 1;
+    width: 100%;
+}
 
 .header {
     background: $headerColor;
@@ -10,6 +17,7 @@
 
 
     &__section {
+        user-select: none;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 600;
@@ -29,6 +37,9 @@
         &>.arrow_down {
             margin-left: 40px;
         }
+    }
+    &__section.enable_sort>.arrow_down{
+        transform: rotate(180deg);
     }
 
     &__section_id {
@@ -90,24 +101,38 @@
     justify-content: space-between;
     padding: 0 $mainSidePadding;
     box-sizing: border-box;
-    &__button {
-        padding: 8px 14px;
-        border: 1px solid #caced4;
-        border-radius: 2px;
 
+    &__button {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
         font-size: 24px;
-        color: #474955;
-        &:hover{
-            border: 1px solid #9da0a5;
+        color: $headerColor;
+        
+        &:hover {
+            color: #7EBC3C;
         }
-      
+
     }
-    &__button.disabled{
+
+    &__button.disabled {
         pointer-events: none;
         user-select: none;
         opacity: 0.8;
+    }
+
+    &__pg_link {
+        text-decoration: none;
+        font-family: 'Roboto';
+        font-style: italic;
+        font-weight: 700;
+        font-size: 18px;
+        color: $headerColor;
+        &:not(:last-child){
+            margin-right: 8px;
+        }
+        &:hover{
+            color: #7EBC3C;
+        }
     }
 }

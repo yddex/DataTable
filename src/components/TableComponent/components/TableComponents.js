@@ -1,13 +1,13 @@
 
-
-
-export const TableComponents = ({postList}) => (
-    <main className="table">
-    {postList.map((post)=>{
-        return  <section className='table__row' key={post.id ?? ""}>
+export const TableComponents = ({postList}) => {
+    
+return (
+    <section className="table">
+    {postList.map((post,i)=>{
+        return  <section className='table__row' key={i}>
          <section 
-         className={`table__column table__column_id ${!post ?? "empty"}`}>{
-         post.id ?? ""}
+         className={`table__column table__column_id ${!post ?? "empty"}`}>
+            {post.id ?? ""}
          </section>
 
          <section 
@@ -21,5 +21,6 @@ export const TableComponents = ({postList}) => (
         </section>
      </section>
     })}
-    </main>
-)
+
+    </section>)
+}

@@ -4,3 +4,4 @@ export const SET_STATE_ERROR = "SET_STATE_ERROR";
 
 
 export const SET_PAGES = "SET_PAGES";
+

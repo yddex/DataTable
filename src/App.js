@@ -5,7 +5,7 @@ import { Table } from "./components/TableComponent/Table";
 import {LoadingComponent} from './components/LoadingComponent'
 import {  useLocation } from "react-router-dom";
 import { getCurrentPageSelector } from "./components/store/selectors/selectors";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
     {loading && !loader && <LoadingComponent/>}
-     {!loading && loader && <Table currentPage={currentPage}/>}
+     {!loading && loader && <main className="main"><Table currentPage={currentPage}/></main>}
      </>
   )
 }

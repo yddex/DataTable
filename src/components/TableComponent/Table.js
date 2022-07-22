@@ -1,44 +1,53 @@
+import { useState } from 'react';
 import { getAllPagesSelector } from '../store/selectors/selectors';
-import { useSelector } from 'react-redux'
-import { HeaderComponent, TableComponents } from './components';
-import { Route, Routes, Link } from 'react-router-dom';
-//import { getCurrentPageSelector } from '../store/selectors/selectors';
+import { useSelector,  } from 'react-redux'
+import { HeaderComponent, TableComponents, NavFooterComponent } from './components';
+import { Route, Routes } from 'react-router-dom';
 import './style.scss'
 
 
 
 
-export function Table({currentPage}) {
-    //const location = useLocation();
+export function Table({ currentPage }) {
     const pages = useSelector(getAllPagesSelector());
+    const [sortedConfig, setSortedConfig] = useState({id: false, title: false, description: false});
+
+    const hundleSort = (key)=>{
+        switch(key){
+            case 'id':
+                setSortedConfig({id: !sortedConfig.id, title: false, description: false});
+                break;
+            
+            case 'title':
+                setSortedConfig({id: false, title: !sortedConfig.title, description: false});
+                break;
+
+            case 'description':
+                setSortedConfig({id: false, title: false, description: !sortedConfig.description});
+                break;
+
+            default: setSortedConfig({id: false, title: false, description: false})
+        }
+    }
     
 
+
     return (
-        <>
-            <HeaderComponent />
-            <Routes>
-                {pages.map((page, i) => {
+        <div className='wrapper'>
+            <div className='wrapper-up'>
 
-                    return <Route exact path={page.path}
-                        element={<TableComponents postList={pages[i].posts} key={i}/>} />
-                })}
-            </Routes>
+                <HeaderComponent hundleSort={hundleSort} sortedConfig={sortedConfig}/>
+                <Routes>
+                    {pages.map((page, i) => {
 
+                        return <Route key={i} exact path={page.path}
+                            element={<TableComponents sortedConfig={sortedConfig} postList={pages[i].posts}  />} />
+                    })}
+                </Routes>
+            </div>
 
-            <nav className='nav footer'>
-                <Link
-                    className={`nav__button nav__button_back`}
-                    to={currentPage.prevPath}>
-                    Назад
-                </Link>
+            <NavFooterComponent currentPage={currentPage} pages={pages} />
 
-                <Link
-                    to={currentPage.nextPath}
-                    onClick={()=>console.log(currentPage.nextPath, 'buttton')}
-                    className={`nav__button nav__button_next`}>
-                    Вперед
-                </Link>
-            </nav>
-        </>
+        </div>
     )
 }
