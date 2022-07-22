@@ -4,10 +4,15 @@ import { useSelector } from 'react-redux'
 import { HeaderComponent, TableComponents } from './components';
 import './style.scss'
 
+
+
+
 export function Table(){
     const posts = useSelector(getPostListSelector())
     const [currentPosts, setCurrentPosts] = useState([]); 
-    const selectPosts = (posts, from = 0,size = 10)=>{
+
+
+    const selectPosts = ( from = 0,size = 10)=>{
         let partPosts = [];
         if(posts.length === 0){
             setCurrentPosts(new Array(10))
@@ -21,11 +26,11 @@ export function Table(){
         
         setCurrentPosts([...partPosts]);
     }
-
+    
 
     useEffect(()=>{
-        selectPosts(posts);
-    },)
+        selectPosts()
+    },[])
 
     return (
         <>

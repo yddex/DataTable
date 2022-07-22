@@ -1,20 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setStateThunk } from "./components/store/thunks/thunks";
-import { useDispatch } from "react-redux";
-import { Table } from "./components/Table/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { Table } from "./components/TableComponent/Table";
+import {LoadingComponent} from './components/LoadingComponent'
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-
+  const [loader, setLoader] = useState(false);
+  const loading = useSelector((state)=>{return state.loading})
+  const enableLoader = ()=>{
+    setTimeout((setLoader(true)),1000)
+  }
   
   useEffect(()=>{
     dispatch(setStateThunk());
-  },[dispatch])
+    enableLoader();
+  },[])
 
   return (
-      <Table/>
-  );
+    <>
+    {loading && !loader && <LoadingComponent/>}
+     {!loading && loader && <Table/>}
+     </>
+  )
 }
 
 export default App;

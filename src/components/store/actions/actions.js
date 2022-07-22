@@ -1,4 +1,4 @@
-import { SET_STATE_POST, SET_STATE_ERROR, SET_STATE_LOADING } from "./types";
+import { SET_STATE_POST, SET_STATE_ERROR, SET_STATE_LOADING, SET_PAGES } from "./types";
 
 export const setState = (payload)=>{
     return {
@@ -16,6 +16,14 @@ export const setLoading = ()=>{
 export const setError = (payload)=>{
     return {
         type: SET_STATE_ERROR,
+        payload
+    }
+}
+
+
+export const setPages = (payload)=>{
+    return{
+        type: SET_PAGES,
         payload
     }
 }

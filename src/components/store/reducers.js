@@ -1,9 +1,11 @@
-import { SET_STATE_POST, SET_STATE_ERROR, SET_STATE_LOADING } from "./actions/types";
+import { SET_STATE_POST, SET_STATE_ERROR, SET_STATE_LOADING, SET_PAGES } from "./actions/types";
 
 let initialState = {
     posts: [],
     loading: false,
-    error: false
+    error: false,
+
+    pages: []
 }
 
 
@@ -18,6 +20,9 @@ export function postsReducer(state = initialState, action){
 
         case SET_STATE_ERROR:
             return {...state, loading: false, error: action.payload}    
+
+        case SET_PAGES:
+            return {...state, pages: action.payload}
 
         default: return state;
     }
