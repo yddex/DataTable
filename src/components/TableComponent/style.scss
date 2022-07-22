@@ -21,10 +21,12 @@
         justify-content: center;
         cursor: pointer;
         transition: all .3s;
-        &:hover{
+
+        &:hover {
             background: $headerColorHover;
         }
-        &>.arrow_down{
+
+        &>.arrow_down {
             margin-left: 40px;
         }
     }
@@ -43,14 +45,16 @@
 
 }
 
-.table{
+.table {
     width: 100%;
     background: #FFFFFF;
-    &__row{
+
+    &__row {
         width: 100%;
         display: flex;
     }
-    &__column{
+
+    &__column {
         min-height: $minHeightColumn;
         border: 1px solid #E3E6EC;
         display: flex;
@@ -58,18 +62,52 @@
         padding: 8px;
         box-sizing: border-box;
     }
-    &__column_id{
+
+    &__column_id {
         width: $widthColumnId;
         justify-content: center;
     }
-    &__column_title{
+
+    &__column_title {
         width: $widthColumnTitle;
     }
-    &__column_description{
+
+    &__column_description {
         width: $widthColumnDescription;
     }
-    &__column.empty{
+
+    &__column.empty {
         height: $emptyHeightColumn;
     }
 
+}
+
+.nav {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $mainSidePadding;
+    box-sizing: border-box;
+    &__button {
+        padding: 8px 14px;
+        border: 1px solid #caced4;
+        border-radius: 2px;
+
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        color: #474955;
+        &:hover{
+            border: 1px solid #9da0a5;
+        }
+      
+    }
+    &__button.disabled{
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.8;
+    }
 }
