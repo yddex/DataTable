@@ -3,6 +3,7 @@ import {
     SET_STATE_ERROR,
     SET_STATE_LOADING,
     SET_PAGES,
+    SET_SORT
 } from "./types";
 
 export const setState = (payload) => {
@@ -33,4 +34,10 @@ export const setPages = (payload) => {
     }
 }
 
+export const setSort = (payload) => {
+    return {
+        type: SET_SORT,
+        payload
+    }
+}
 

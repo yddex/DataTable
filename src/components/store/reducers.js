@@ -10,6 +10,7 @@ let initialState = {
     posts: [],
     loading: false,
     error: false,
+    sortedPosts: [],
 
     pages: [],
     currentPage: {}
@@ -31,6 +32,8 @@ export function postsReducer(state = initialState, action) {
         case SET_PAGES:
             return { ...state, pages: action.payload }
 
+        case SET_SORT:
+             return {...state, sortedPosts: action.payload}
 
         default: return state;
     }

@@ -1,5 +1,5 @@
 import { getPostsAPI } from "../../API/api"
-import { setState, setError ,setLoading, setPages } from "../actions/actions"
+import { setState, setError ,setLoading, setPages, setSort } from "../actions/actions"
 
 
 
@@ -20,12 +20,16 @@ export const setStateThunk = () => async (dispatch, getState) => {
 
 
 
-export const initPageThunk = (pagePost = 10) => (dispatch, getState)=>{
-    const state = getState();
-    const posts = state.posts;
+export const initPageThunk = (sorted=false, pagePostCount = 10, ) => (dispatch, getState)=>{
+    let posts = [];
+    if(!sorted){
+        posts = [...getState().posts];
+    }else{
+        posts = [...getState().sortedPosts];
+    }
     const pages = [];
 
-    for(let i=0, j=1; i < posts.length; i+=pagePost, j++){
+    for(let i=0, j=1; i < posts.length; i+=pagePostCount, j++){
         let page = {
             number: j,
             path: `/${j}`,
@@ -33,7 +37,7 @@ export const initPageThunk = (pagePost = 10) => (dispatch, getState)=>{
             nextPath: `/${j+1}`,
             posts: []
         }
-        page.posts.push(...posts.slice(i,i+10));
+        page.posts.push(...posts.slice(i,i+pagePostCount));
         pages.push({...page});
     }
 
@@ -41,9 +45,52 @@ export const initPageThunk = (pagePost = 10) => (dispatch, getState)=>{
     pages[1].prevPath = '/'
     pages[0].prevPath = pages[pages.length-1].path;
     pages[pages.length-1].nextPath = '/';
+
+
     dispatch(setPages(pages));
-    
 }
+
+
+
+export const setSortThunk = (sortBoolean=false, key) => (dispatch, getState) => {
+    const posts = [...getState().posts];
+    let sortedList = [];
+
+    if(sortBoolean === true && key === "id"){
+        sortedList = posts.sort((a,b)=>{
+            if(a[key] > b[key]){
+                return -1;
+            }
+            if(a[key] < b[key]){
+                return 1;
+            }
+            return 0;
+        })
+        dispatch(setSort(sortedList));
+    }
+    else if(sortBoolean === true && (key === "title" || key === "body")){
+
+        sortedList = posts.sort((a,b)=>{
+            if(a[key][0] > b[key][0]){
+                return -1;
+            }
+            if(a[key][0] < b[key][0]){
+                return 1;
+            }
+            return 0;
+        })
+        dispatch(setSort(sortedList));
+    }
+    else{
+        dispatch(setSort(posts))
+    }
+    dispatch(initPageThunk(true));
+}
+
+
+
+    
+
 
 
 

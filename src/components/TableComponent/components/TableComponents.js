@@ -1,7 +1,9 @@
 
 export const TableComponents = ({postList}) => {
-    
-return (
+
+return (<>
+ 
+
     <section className="table">
     {postList.map((post,i)=>{
         return  <section className='table__row' key={i}>
@@ -22,5 +24,7 @@ return (
      </section>
     })}
 
-    </section>)
+    </section>
+    </>
+    )
 }
