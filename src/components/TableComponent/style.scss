@@ -1,11 +1,50 @@
 @import './vars';
-.wrapper{
+
+.wrapper {
     display: flex;
     flex-direction: column;
 }
-.wrapper-up{
+
+.wrapper-up {
     flex-grow: 1;
     width: 100%;
+}
+.search__form{
+    margin-top: 23px;
+    margin-bottom: 15px;
+    max-width: 630px;
+    position: relative;
+    display: flex;
+}
+.search__icon{
+    position: absolute;
+    align-self: center;
+    right: 15px;
+    cursor: pointer;
+}
+.search__input {
+    width: 100%;
+    padding: 18px 26px;
+    padding-right: 40x;
+    background: #5A5C66;
+    border: none;
+    outline: none;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #B3B7BF;
+
+    &::placeholder {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #B3B7BF;
+    }
 }
 
 .header {
@@ -29,7 +68,7 @@
         justify-content: center;
         cursor: pointer;
         transition: all .3s;
-
+        box-sizing: border-box;
         &:hover {
             background: $headerColorHover;
         }
@@ -38,7 +77,8 @@
             margin-left: 40px;
         }
     }
-    &__section.enable_sort>.arrow_down{
+
+    &__section.enable_sort>.arrow_down {
         transform: rotate(180deg);
     }
 
@@ -63,6 +103,9 @@
     &__row {
         width: 100%;
         display: flex;
+        &.searched-row{
+            background: #ebe6e6ce;
+        }
     }
 
     &__column {
@@ -108,7 +151,7 @@
         font-weight: 500;
         font-size: 24px;
         color: $headerColor;
-        
+
         &:hover {
             color: #7EBC3C;
         }
@@ -128,11 +171,23 @@
         font-weight: 700;
         font-size: 18px;
         color: $headerColor;
-        &:not(:last-child){
+
+        &:not(:last-child) {
             margin-right: 8px;
         }
-        &:hover{
+
+        &:hover {
             color: #7EBC3C;
+        }
+    }
+}
+
+@media (max-width: 1000px){
+    .header{
+        &__section{
+            &>.arrow_down{
+                margin-left: 18px;
+            }
         }
     }
 }

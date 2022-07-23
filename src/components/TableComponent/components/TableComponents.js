@@ -1,12 +1,15 @@
 
-export const TableComponents = ({postList}) => {
+export const TableComponents = ({postList, searchedRow}) => {
 
 return (<>
  
 
     <section className="table">
     {postList.map((post,i)=>{
-        return  <section className='table__row' key={i}>
+        return  <section 
+        className={`table__row ${searchedRow.includes(post.id) && 'searched-row'}`}
+         key={i}>
+
          <section 
          className={`table__column table__column_id ${!post ?? "empty"}`}>
             {post.id ?? ""}
