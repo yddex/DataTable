@@ -28,23 +28,23 @@ export const initPageThunk = (sorted=false, pagePostCount = 10, ) => (dispatch, 
         posts = [...getState().sortedPosts];
     }
     const pages = [];
-
+    
     for(let i=0, j=1; i < posts.length; i+=pagePostCount, j++){
         let page = {
             number: j,
-            path: `/${j}`,
-            prevPath: `/${j-1}`,
-            nextPath: `/${j+1}`,
+            path: `/DataTable/${j}`,
+            prevPath: `/DataTable/${j-1}`,
+            nextPath: `/DataTable/${j+1}`,
             posts: []
         }
         page.posts.push(...posts.slice(i,i+pagePostCount));
         pages.push({...page});
     }
 
-    pages[0].path = '/';
-    pages[1].prevPath = '/'
+    pages[0].path = '/DataTable/';
+    pages[1].prevPath = '/DataTable/'
     pages[0].prevPath = pages[pages.length-1].path;
-    pages[pages.length-1].nextPath = '/';
+    pages[pages.length-1].nextPath = '/DataTable/';
 
 
     dispatch(setPages(pages));

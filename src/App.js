@@ -15,7 +15,7 @@ function App() {
   const currentPage = useSelector(getCurrentPageSelector(location));
 
   const enableLoader = ()=>{
-    setTimeout((setLoader(true)),1000)
+    setTimeout((setLoader(true)), 2000)
   }
   
   useEffect(()=>{
