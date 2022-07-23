@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './search.scss';
 
 export function SearchComponent({setSearchedRow, posts}){
     const [searchValue, setSearchValue] = useState('');
