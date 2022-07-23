@@ -9,45 +9,6 @@
     flex-grow: 1;
     width: 100%;
 }
-.search__form{
-    margin-top: 23px;
-    margin-bottom: 15px;
-    max-width: 630px;
-    position: relative;
-    display: flex;
-}
-.search__icon{
-    position: absolute;
-    align-self: center;
-    right: 15px;
-    cursor: pointer;
-}
-.search__input {
-    width: 100%;
-    padding-top: 18px;
-    padding-bottom: 15px;
-    padding-right: 40x;
-    padding-left: 26px;
-    background: #5A5C66;
-    border: none;
-    outline: none;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
-    color: #B3B7BF;
-
-    &::placeholder {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 130%;
-        color: #B3B7BF;
-    }
-}
 
 .header {
     background: $headerColor;
